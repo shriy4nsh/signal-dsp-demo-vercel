@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Real-time DSP Lab — Adaptive Noise Cancellation</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Real-time DSP Lab</h1>
+      <p>Adaptive Noise Cancellation + Spectrogram • Demo</p>
+    </header>
+
+    <section class="controls">
+      <div>
+        <button id="startBtn">Start</button>
+        <button id="stopBtn" disabled>Stop</button>
+        <label>Sampling:
+          <select id="sampleRate">
+            <option value="16000">16 kHz</option>
+            <option value="22050">22.05 kHz</option>
+            <option value="44100" selected>44.1 kHz</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="filter-controls">
+        <label>FIR preset:
+          <select id="firPreset">
+            <option value="none">None</option>
+            <option value="lowpass">Low-pass</option>
+            <option value="highpass">High-pass</option>
+            <option value="bandstop">Band-stop</option>
+          </select>
+        </label>
+
+        <label>LMS μ: <input id="mu" type="range" min="0.0001" max="0.05" step="0.0001" value="0.005"></label>
+        <span id="muVal">0.005</span>
+
+        <label>Filter Order: <input id="filterOrder" type="range" min="4" max="64" step="1" value="32"></label>
+        <span id="orderVal">32</span>
+      </div>
+    </section>
+
+    <section class="visuals">
+      <div class="canvas-row">
+        <div class="canvas-card">
+          <h3>Time waveform (primary)</h3>
+          <canvas id="waveform" width="640" height="120"></canvas>
+        </div>
+        <div class="canvas-card">
+          <h3>Spectrum (magnitude)</h3>
+          <canvas id="spectrum" width="640" height="120"></canvas>
+        </div>
+      </div>
+
+      <div class="canvas-row">
+        <div class="canvas-card full">
+          <h3>Spectrogram (sliding)</h3>
+          <canvas id="spectrogram" width="800" height="200"></canvas>
+        </div>
+      </div>
+
+      <div class="metrics">
+        <div>SNR before/after: <span id="snrBefore">—</span> / <span id="snrAfter">—</span></div>
+        <div>MSE: <span id="mse">—</span></div>
+      </div>
+
+      <div class="links">
+        <!-- local uploaded files (replace with repo URLs after upload if needed) -->
+        <a id="pptLink" href="/mnt/data/SMART WASTE MANAGEMENT SYSTEM(PPT).pptx">Open related PPT (uploaded)</a> |
+        <a id="pdfLink" href="/mnt/data/Smartwastemanagement.pdf">Open related PDF (uploaded)</a>
+      </div>
+    </section>
+
+    <footer>
+      <small>Built for Signals & Systems demo — microphone permission required.</small>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
